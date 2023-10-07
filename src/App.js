@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react';
+import MyMap from "./components/Map"
 
 const App = () => {
   return (
-    <div>App</div>
+    <>
+      <MyMap/>
+    </>
   )
 }
 
