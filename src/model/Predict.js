@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 
-function Predict() {
+function Predict(props) {
+
+  const{latitude , longitude}=props;
   // Define a function to send a request to the ML model endpoint
   async function sendRequest(inputData) {
     try {
@@ -25,7 +27,7 @@ function Predict() {
 
   // Handle user input (e.g., user clicks) and collect input data
   const handlePredictionClick = () => {
-    const inputData = [319, 295]; // Replace with your actual input data
+    const inputData = [latitude, longitude]; // Replace with your actual input data
 
     // Call the sendRequest function to get predictions
     sendRequest(inputData);
