@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function Predict(props) {
 
-  const{latitude , longitude , month , day}=props;
+  const{latitude , longitude , month , day  , setResult}=props;
   // Define a function to send a request to the ML model endpoint
   async function sendRequest(inputData) {
     try {
@@ -20,6 +20,7 @@ function Predict(props) {
 
       // Now you can use the prediction data as needed
       console.log('Prediction:', prediction);
+      setResult(prediction);
     } catch (error) {
       console.error('Error:', error);
     }

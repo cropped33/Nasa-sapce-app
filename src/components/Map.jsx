@@ -22,6 +22,7 @@ const Map = () => {
   const [latlng ,setLatlng]=useState({lat:0  , lng:0})
   const [month , setMonth]=useState("");
   const [day , setDay]=useState("");
+  const[result  , setResult]=useState("");
 
  
 
@@ -33,6 +34,7 @@ const Map = () => {
             setLatlng(e.latlng);
         },
     });
+    // map.addLayer(TileLayer)
     return null;
 };
   const mapStyles = {
@@ -42,13 +44,43 @@ const Map = () => {
     borderRadius: "5px",
   };
 
-  // Array of circle data with latitude, longitude, and radius
-  const circles = [
-    { latitude: 51.508, longitude: -0.11, radius: 500 },
-    { latitude: 51.518, longitude: -0.12, radius: 800 },
-    { latitude: 51.528, longitude: -0.13, radius: 1000 },
-    // Add more circles as needed
-  ];
+  let circleStyles;
+  let circles;
+
+  if(result===2){
+ circles = [
+      { latitude: latlng.lat, longitude: latlng.lng, radius: 500 },
+    ];
+
+    circleStyles={
+      color: "red",
+      fillColor: "#f03",
+      fillOpacity: 0.5,
+    }
+  }else if(result===1){
+     circles = [
+      { latitude: latlng.lat, longitude: latlng.lng, radius: 100 },
+    ];
+    circleStyles={
+      color: "yellow",
+      fillColor: "#f03",
+      fillOpacity: 0.2,
+    }
+  }
+  else{
+    circles=[];
+    circleStyles={}
+  }
+  // circles = [
+  //   { latitude: latlng.lat, longitude: latlng.lng, radius: 500 },
+  // ];
+
+  // circleStyles={
+  //   color: "red",
+  //   fillColor: "#f03",
+  //   fillOpacity: 0.5,
+  // }
+
 
   // Function to handle circle click event
   const handleCircleClick = (e, circleData) => {
@@ -79,11 +111,7 @@ const Map = () => {
           <Circle
             key={index}
             center={[circleData.latitude, circleData.longitude]}
-            pathOptions={{
-              color: "red",
-              fillColor: "#f03",
-              fillOpacity: 0.5,
-            }}
+            pathOptions={circleStyles}
             radius={circleData.radius}
             eventHandlers={{
               click: (e) => handleCircleClick(e, circleData), // Attach click event handler
@@ -119,7 +147,7 @@ const Map = () => {
         onChange={(e)=>setDay(e.target.value)}
 
       />
-      <Predict latitude={latlng.lat} longitude={latlng.lng} month={month} day={day}/>
+      <Predict latitude={latlng.lat} longitude={latlng.lng} month={month} day={day} setResult={setResult}/>
           </div>
   );
 };
