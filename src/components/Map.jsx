@@ -20,6 +20,9 @@ L.Icon.Default.mergeOptions({
 
 const Map = () => {
   const [latlng ,setLatlng]=useState({lat:0  , lng:0})
+  const [month , setMonth]=useState("");
+  const [day , setDay]=useState("");
+
  
 
 
@@ -86,10 +89,7 @@ const Map = () => {
               click: (e) => handleCircleClick(e, circleData), // Attach click event handler
             }}
           >
-            {/* Attach a Tooltip (popup) */}
-            <Tooltip>
-              This is a circle with a radius of {circleData.radius} meters.
-            </Tooltip>
+
           </Circle>
         ))}
 
@@ -101,12 +101,25 @@ const Map = () => {
         type="text"
         value={latlng.lat}
       />
-      <label htmlFor="longitude">Longitude</label>a
+      <label htmlFor="longitude">Longitude</label>
       <input
         type="text"
         value={latlng.lng}
       />
-      <Predict latitude={latlng.lat} longitude={latlng.lng}/>
+      <label htmlFor="longitude">month</label>
+      <input
+        type="number"
+        value={month}
+        onChange={(e)=>setMonth(e.target.value)}
+      />
+      <label htmlFor="longitude">day</label>a
+      <input
+        type="number"
+        value={day}
+        onChange={(e)=>setDay(e.target.value)}
+
+      />
+      <Predict latitude={latlng.lat} longitude={latlng.lng} month={month} day={day}/>
           </div>
   );
 };
