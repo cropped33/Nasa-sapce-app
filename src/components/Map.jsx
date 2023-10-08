@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-<<<<<<< HEAD
 import {
   MapContainer,
   TileLayer,
@@ -10,11 +9,6 @@ import {
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import Predict from "../model/Predict";
-=======
-import { MapContainer, TileLayer, Circle, Tooltip } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
->>>>>>> 292ed944e20d1e9244479eafdf32d4e57ad81515
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -71,29 +65,20 @@ const Map = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetmap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-<<<<<<< HEAD
         <Marker position={[latlng.lat, latlng.lng]}>
           <Popup position={[51.505, -0.09]}>
             <p>hello</p>
           </Popup>
         </Marker>
 
-=======
-        
->>>>>>> 292ed944e20d1e9244479eafdf32d4e57ad81515
         {/* Render circles dynamically */}
         {circles.map((circleData, index) => (
           <Circle
             key={index}
             center={[circleData.latitude, circleData.longitude]}
             pathOptions={{
-<<<<<<< HEAD
               color: "red",
               fillColor: "#f03",
-=======
-              color: circleData.radius <= 600 ? 'red' : 'green',
-              fillColor: '#f03',
->>>>>>> 292ed944e20d1e9244479eafdf32d4e57ad81515
               fillOpacity: 0.5,
             }}
             radius={circleData.radius}
@@ -110,7 +95,6 @@ const Map = () => {
 
 <LocationFinderDummy />
       </MapContainer>
-<<<<<<< HEAD
 
       <label htmlFor="Latitude">Latitude</label>
       <input
@@ -124,9 +108,6 @@ const Map = () => {
       />
       <Predict latitude={latlng.lat} longitude={latlng.lng}/>
           </div>
-=======
-    </div>
->>>>>>> 292ed944e20d1e9244479eafdf32d4e57ad81515
   );
 };
 
