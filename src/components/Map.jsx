@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
+import { MapContainer, TileLayer, Circle, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
@@ -31,6 +31,12 @@ const Map = () => {
     // Add more circles as needed
   ];
 
+  // Function to handle circle click event
+  const handleCircleClick = (e, circleData) => {
+    const curPos = e.latlng;
+    alert(`Clicked on circle with radius ${circleData.radius} at: ${curPos.lat} : ${curPos.lng}`);
+  };
+
   return (
     <div>
       <MapContainer center={position} zoom={13} scrollWheelZoom={false} style={mapStyles}>
@@ -38,39 +44,29 @@ const Map = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetmap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={position}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
-
+        
         {/* Render circles dynamically */}
         {circles.map((circleData, index) => (
           <Circle
             key={index}
             center={[circleData.latitude, circleData.longitude]}
             pathOptions={{
-              color: 'red',
+              color: circleData.radius <= 600 ? 'red' : 'green',
               fillColor: '#f03',
               fillOpacity: 0.5,
             }}
             radius={circleData.radius}
-          />
+            eventHandlers={{
+              click: (e) => handleCircleClick(e, circleData), // Attach click event handler
+            }}
+          >
+            {/* Attach a Tooltip (popup) */}
+            <Tooltip>
+              This is a circle with a radius of {circleData.radius} meters.
+            </Tooltip>
+          </Circle>
         ))}
       </MapContainer>
-
-      <label htmlFor="Latitude">Latitude</label>
-      <input
-        type="text"
-        value={latitude}
-        onChange={(e) => setLatitude(e.target.value)}
-      />
-      <label htmlFor="longitude">Longitude</label>
-      <input
-        type="text"
-        value={longitude}
-        onChange={(e) => setLongitude(e.target.value)}
-      />
     </div>
   );
 };
